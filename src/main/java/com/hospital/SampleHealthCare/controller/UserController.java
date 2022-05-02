@@ -124,9 +124,13 @@ public class UserController {
 	}
 
 	// delete patient
-	@DeleteMapping("/deleteappointment/{id}")
-	public ResponseEntity<Map<String, Boolean>> deleteAppointment(@PathVariable Long id) throws ResourceNotFoundException {
-		return userService.deleteAppointment(id);
+	@DeleteMapping("/deleteappointment")
+//	public ResponseEntity<Map<String, Boolean>> deleteAppointment(@PathVariable Long id) throws ResourceNotFoundException {
+//		return userService.deleteAppointment(id);
+//	}
+	public Appointment removeAppointment(@RequestBody Appointment user) {
+		userService.deleteAppointment(user);
+		return user;
 	}
 	
 }
