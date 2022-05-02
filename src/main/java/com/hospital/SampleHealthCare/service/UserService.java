@@ -72,19 +72,23 @@ public class UserService implements UserDetailsService {
 	}
 
 	// delete patient
-	public ResponseEntity<Map<String, Boolean>> deletePatient(Long id) throws ResourceNotFoundException {
-
-		Patients patient = userRepository.findByPatientId(id);
-
-		if (patient != null) {
-			userRepository.delete(patient);
-			Map<String, Boolean> response = new HashMap<>();
-			response.put("deleted", Boolean.TRUE);
-			return ResponseEntity.ok(response);
-		} else {
-			throw new ResourceNotFoundException("User not found with this id: " + id);
-		}
-
+//	public ResponseEntity<Map<String, Boolean>> deletePatient(Long id) throws ResourceNotFoundException {
+//
+//		Patients patient = userRepository.findByPatientId(id);
+//
+//		if (patient != null) {
+//			userRepository.delete(patient);
+//			Map<String, Boolean> response = new HashMap<>();
+//			response.put("deleted", Boolean.TRUE);
+//			return ResponseEntity.ok(response);
+//		} else {
+//			throw new ResourceNotFoundException("User not found with this id: " + id);
+//		}
+//
+//	}
+	
+	public void deletePatient(Patients patients) {
+		userRepository.delete(patients);
 	}
 	
 	//Appointment logic

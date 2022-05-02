@@ -40,7 +40,7 @@ public class SwaggerConfig {
 
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
-                .title("JWT security demo")
+                .title("Healthcare project with JWT security")
                 .description("JWT authentication for demo purpose")
                 .version("2.0")
                 .build();

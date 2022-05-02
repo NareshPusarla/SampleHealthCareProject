@@ -23,6 +23,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtFilter jwtFilter;
+    
+    private static final String[] public_urls = {
+    	"/v2/api-docs",
+    	"/swagger-resources/**",
+    	"/swagger-ui/**",
+    	"/webjars/**"
+    };
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -37,21 +44,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/authenticate/**")
-                .permitAll()
-                .antMatchers("/swagger-ui/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .exceptionHandling()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+//        http.csrf()
+//                .disable()
+//                .authorizeRequests()
+//                .antMatchers("/authenticate/**")
+//                .permitAll()
+//                .antMatchers(public_urls)
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .exceptionHandling()
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+    	
+    	http.csrf().disable().cors().and()
+    		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    		.and()
+    		.authorizeRequests().antMatchers(public_urls).permitAll()
+    		.anyRequest().authenticated()
+    		.and()
+    		.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

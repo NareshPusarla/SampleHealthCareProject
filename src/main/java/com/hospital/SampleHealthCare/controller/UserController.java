@@ -87,10 +87,17 @@ public class UserController {
 	}
 
 	// delete patient
-	@DeleteMapping("/deleterecord/{id}")
-	public ResponseEntity<Map<String, Boolean>> deletePatient(@PathVariable Long id) throws ResourceNotFoundException {
-		return userService.deletePatient(id);
+//	@DeleteMapping("/deleterecord/{id}")
+//	public ResponseEntity<Map<String, Boolean>> deletePatient(@PathVariable Long id) throws ResourceNotFoundException {
+//		return userService.deletePatient(id);
+//	}
+	
+	@DeleteMapping("/deleterecord")
+	public Patients removeUser(@RequestBody Patients user) {
+		userService.deletePatient(user);
+		return user;
 	}
+	
 
 	//Appointment api
 	
